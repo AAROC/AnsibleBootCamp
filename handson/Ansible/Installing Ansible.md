@@ -20,4 +20,8 @@ git clone https://github.com/ansible/ansible --recursive
 
 # Things that went wrong
 
-  1. On CentOS we got SSL errors. 
+  1. On CentOS we got SSL errors.
+
+# Questions
+
+  1. Does Ansible use virtualenv ? 
