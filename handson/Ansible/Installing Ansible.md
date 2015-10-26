@@ -11,3 +11,13 @@ Installing Ansible:
 ```
     apt-get install git python build-essential python-pip
 ```
+
+Now : clone Ansible
+
+```
+git clone https://github.com/ansible/ansible --recursive
+```
+
+# Things that went wrong
+
+  1. On CentOS we got SSL errors. 
