@@ -1,5 +1,11 @@
 # Your first inventory. Only contains localhost
 localhost
 # Choose your OS and add your localhost to that group
-[OS-based group]
+[CentOS]
 localhost
+
+[Debian]
+
+
+[Ubuntu:children]
+Debian
