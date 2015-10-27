@@ -1,0 +1,5 @@
+---
+- name: Set up webservers
+  hosts: webservers
+  roles:
+    - { role: webserver, sudo: true }
