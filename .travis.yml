@@ -1,4 +1,6 @@
 ---
+# This is an example .travis.
+# If you've forked this repo, please make sure  to change the notifications section
 language: bash
 sudo: required
 services: docker
@@ -7,4 +9,16 @@ before_install:
   - docker pull aaroc/code-rade-sl6-ansible
 
 install:
+<<<<<<< HEAD
   - docker run -v $PWD "ansible-playbook -i handson/inventory.lesson1 lesson1.yml"
+=======
+  - docker run aaroc/code-rade-sl6-ansible -v $PWD "ansible-playbook -i handson/inventory.lesson1 lesson1.yml"
+
+notifications:
+  slack:
+    rooms:
+      - ansible4devops2015:It5SDeYANNXDtXh6YmbmO6Rh#testing
+    on_success: always
+    on_failure: always
+    on_start: always
+>>>>>>> 786a17830d4289be6ee9b2e5c558cbb80b69853d
