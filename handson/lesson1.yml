@@ -46,4 +46,8 @@
       changed_when: false
     - name: output time
       debug:
-        var: thetime
+        msg: "{{ thetime['stdout_lines'] | regex_replace('^.*offset (\\d+.\\d+).*$', '\\1') | float }}"
+    #- name: Raise error if differente is larger than acceptable difference
+    #  debug:
+    #    msg: "The time difference is ok"
+    #  when: {{ thetime['stdout_lines'] | regex_replace('^.*offset (\\d+.\\d+).*$', '\\1') | float }} * 1000 > time_difference
