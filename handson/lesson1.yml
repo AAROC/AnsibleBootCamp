@@ -1,26 +1,60 @@
 ---
 # the first playbook for lesson 1 - a list of tasks with no role
 
-- hosts: all
-  name: Check the basic connectivity
-  tasks:
-  - ping:
+#- hosts: all
+#  accelerate: true
+#  name: Check the basic connectivity
+#  tasks:
+#  - ping:
 
 - hosts: all
+#  accelerate: true
   name: Set up the basic users
   sudo: true
   tasks:
-  - user:
+  - name: ensure that bob is present
+    user:
       name: bob
       home: /dev/null
 
 - hosts: all
+  #accelerate: true
   name: ensure system is properly configured
   sudo: true
+  vars_files:
+    - lesson1_vars.yml
   tasks:
-    - yum:
-        name: ntp
+    - name: ensure that ntp is installed
+      yum:
+        name: "{{ item }}"
         state: present
-    - service:
+      with_items: packages
+    - name: push the template for ntp.conf
+      template:
+        src: ntp.conf.j2
+        dest: /etc/ntp.conf
+    - name: ensure that ntp is started
+      service:
         name: ntpd
         state: started
+
+
+# Now, we have to test that the machines are actually properly configured.
+- hosts: all
+  #accelerate: true
+  name: Testing
+  tasks:
+  - name: Get time drift
+    command: /usr/sbin/ntptime
+    register: thetime
+    changed_when: false
+
+  - name: output time
+    debug:
+      var: thetime.stdout_lines | search(offset)
+
+#  - name: Raise error if differnce is larger than acceptable difference
+#    ....
+#    # this will not work - you need to find a jinja filter that does  this for you.
+#    # see http://docs.ansible.com/ansible/playbooks_filters.html
+#    when: thetime.() > time_difference
