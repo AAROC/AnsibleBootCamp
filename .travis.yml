@@ -7,4 +7,12 @@ before_install:
   - docker pull aaroc/code-rade-sl6-ansible
 
 install:
-  - docker run -v $PWD -c "ansible-playbook -i handson/inventory.lesson1 lesson1.yml"
+  - docker run -v $PWD "ansible-playbook -i handson/inventory.lesson1 lesson1.yml"
+
+notifications:
+slack:
+    rooms:
+      - ansible4devops2015:It5SDeYANNXDtXh6YmbmO6Rh#testing
+    on_success: always
+    on_failure: always
+    on_start: always
