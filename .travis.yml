@@ -1,4 +1,6 @@
 ---
+# This is an example .travis.
+# If you've forked this repo, please make sure  to change the notifications section
 language: bash
 sudo: required
 services: docker
@@ -10,7 +12,7 @@ install:
   - docker run -v $PWD "ansible-playbook -i handson/inventory.lesson1 lesson1.yml"
 
 notifications:
-slack:
+  slack:
     rooms:
       - ansible4devops2015:It5SDeYANNXDtXh6YmbmO6Rh#testing
     on_success: always
