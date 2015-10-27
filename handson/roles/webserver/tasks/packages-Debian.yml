@@ -1,0 +1,7 @@
+---
+- name: Install base packages
+  become_user: root
+  apt:
+    name: "{{ item }}"
+    state: present
+  with_items: base_packages

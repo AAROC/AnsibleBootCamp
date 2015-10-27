@@ -11,6 +11,7 @@ before_install:
 
 install:
   - docker run -v $PWD:$PWD -w $PWD aaroc/code-rade-sl6-ansible ansible-playbook -c local -i handson/inventory.localhost handson/lesson1.yml
+  - docker run -v $PWD:$PWD -w $PWD aaroc/code-rade-sl6-ansible ansible-playbook -c local -i handson/inventory.localhost handson/lesson3.yml
 
 notifications:
   slack:

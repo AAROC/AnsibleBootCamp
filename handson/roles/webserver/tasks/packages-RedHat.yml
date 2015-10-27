@@ -1,0 +1,20 @@
+---
+- name: Ensure that EPEL is present and configured
+  become_user: root
+  yum:
+    name: "{{ epel_package_url[ansible_distribution_major_version] }}"
+  register: epelinstall
+
+- name: Re-generate metadata
+  become_user: root
+  yum:
+    name: "*"
+    state: latest
+  when: epelinstall.changed
+
+- name: Install base packages
+  become_user: root
+  yum:
+    name: "{{ item }}"
+    state: present
+  with_items: base_packages

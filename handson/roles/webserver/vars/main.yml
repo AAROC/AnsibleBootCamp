@@ -1,0 +1,9 @@
+---
+
+prova: ciao
+
+#- include: packages-RedHat.yml
+#  when: ansible_os_family == 'RedHat'
+#
+#- include: packages-Debian.yml
+#  when: ansible_os_family == 'Debian'
