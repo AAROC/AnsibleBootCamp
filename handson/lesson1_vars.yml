@@ -1,0 +1,7 @@
+---
+ntp_servers:
+  - ntp1.inrim.it
+  - ntp1.inrim.it
+packages:
+  - ntp
+time_difference: 1000
