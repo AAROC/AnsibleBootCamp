@@ -1,0 +1,9 @@
+---
+ntp_servers:
+ - ntp1.inrim.it
+ - ntp2.inrim.it
+packages:
+#  - python-keyczar
+  - ntp
+# acceptable time difference in microseconds
+time_difference: 1000
