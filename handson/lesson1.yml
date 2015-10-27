@@ -1,0 +1,23 @@
+---
+# the first playbook for lesson 1 - a list of tasks with no role
+
+- hosts: all
+  name: Check the basic connectivity
+  tasks:
+  - ping:
+
+- hosts: all
+  name: Set up the basic users
+  sudo: true
+  tasks:
+  - user:
+      name: bob
+      home: /dev/null
+
+- hosts: all
+  name: ensure system is properly configured
+  sudo: true
+  tasks:
+    - module1
+    - module2
+    - module3
