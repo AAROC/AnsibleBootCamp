@@ -18,6 +18,9 @@
   name: ensure system is properly configured
   sudo: true
   tasks:
-    - module1
-    - module2
-    - module3
+    - yum:
+        name: ntp
+        state: present
+    - service:
+        name: ntpd
+        state: started
