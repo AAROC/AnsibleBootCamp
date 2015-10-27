@@ -21,6 +21,9 @@
     - yum:
         name: ntp
         state: present
+    - template:
+        src: ntp.conf.j2
+        dest: /etc/ntpd/ntp.conf
     - service:
         name: ntpd
         state: started
