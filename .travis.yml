@@ -7,7 +7,7 @@ services: docker
 
 before_install:
 #  - docker pull aaroc/code-rade-sl6-ansible
-  - apt-get install ansible
+  - sudo apt-get install ansible
 
 install:
 #  - docker run aaroc/code-rade-sl6-ansible -v $PWD "ansible-playbook -i handson/inventory.lesson1 lesson1.yml"
