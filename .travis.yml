@@ -6,7 +6,6 @@ sudo: required
 services: docker
 
 before_install:
-  - sudo apt-get -y install python-keyczar
   - docker pull aaroc/code-rade-sl6-ansible
 
 install:
