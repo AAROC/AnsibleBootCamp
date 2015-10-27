@@ -10,7 +10,7 @@
 - hosts: all
   #accelerate: true
   name: Set up the basic users
-  sudo: true
+  become_user: root
   tasks:
   - user:
       name: bob
@@ -19,7 +19,7 @@
 - hosts: all
   #accelerate: true
   name: ensure system is properly configured
-  sudo: true
+  become_user: root
   vars_files: ["lesson1_vars.yml"]
   tasks:
     - name: ensure that packages are installed

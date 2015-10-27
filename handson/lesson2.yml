@@ -1,0 +1,22 @@
+---
+# the first playbook for lesson 2 - a list of tasks with no role
+
+- hosts: all
+  #accelerate: true
+  name: Check the basic connectivity
+  tasks:
+  - ping:
+
+- hosts: all
+  #accelerate: true
+  name: Set up the basic users
+  become_user: root
+  vars_files:
+  - "lesson2_vars.yml"
+  tasks:
+  - user:
+      name: "{{ item.name }}"
+      password: "{{ item.password }}"
+      home: /bin/bash
+    with_items: users
+
