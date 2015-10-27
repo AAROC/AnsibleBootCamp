@@ -20,7 +20,7 @@
   #accelerate: true
   name: ensure system is properly configured
   sudo: true
-  vars_files: ["lesson1_vars.yml"]
+  vars_files: ["handson/lesson1_vars.yml"]
   tasks:
     - name: ensure that packages are installed
       yum:
