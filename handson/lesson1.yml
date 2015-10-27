@@ -23,7 +23,7 @@
         state: present
     - template:
         src: ntp.conf.j2
-        dest: /etc/ntpd/ntp.conf
+        dest: /etc/ntp.conf
     - service:
         name: ntpd
         state: started
