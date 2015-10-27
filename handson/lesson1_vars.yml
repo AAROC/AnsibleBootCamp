@@ -4,4 +4,5 @@ ntp_servers:
   - ntp1.inrim.it
 packages:
   - ntp
-time_difference: 1000
+time_difference:
+  - 1000

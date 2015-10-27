@@ -20,7 +20,7 @@
   #accelerate: true
   name: ensure system is properly configured
   sudo: true
-  vars_files: ["handson/lesson1_vars.yml"]
+  vars_files: ["lesson1_vars.yml"]
   tasks:
     - name: ensure that packages are installed
       yum:
@@ -47,7 +47,8 @@
     - name: output time
       debug:
         msg: "{{ thetime['stdout_lines'] | regex_replace('^.*offset (\\d+.\\d+).*$', '\\1') | float }}"
-    #- name: Raise error if differente is larger than acceptable difference
-    #  debug:
-    #    msg: "The time difference is ok"
-    #  when: {{ thetime['stdout_lines'] | regex_replace('^.*offset (\\d+.\\d+).*$', '\\1') | float }} * 1000 > time_difference
+    - name: Raise error if differente is larger than acceptable difference
+      debug:
+        msg: "The time difference is ok"
+      when: "{{ thetime['stdout_lines'] | regex_replace('^.*offset (\\d+.\\d+).*$', '\\1') | float * 1000 > item }}"
+      with_items: time_difference
