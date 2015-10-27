@@ -7,4 +7,4 @@ before_install:
   - docker pull aaroc/code-rade-sl6-ansible
 
 install:
-  - docker run -v $PWD -c "ansible-playbook -i handson/inventory.lesson1 lesson1.yml"
+  - docker run -v $PWD "ansible-playbook -i handson/inventory.lesson1 lesson1.yml"
