@@ -19,6 +19,7 @@
 
 - hosts: all
   #accelerate: true
+# this should include the additon of EPEL
   name: ensure system is properly configured
   sudo: true
   vars_files:
@@ -51,7 +52,8 @@
 
   - name: output time
     debug:
-      var: thetime.stdout_lines | search(offset)
+      #var: "{{ thetime.stdout_lines | search(offset) }}"
+      var: "{{ thetime['stdout_lines'] | search('.*offset.*') }}"
 
 #  - name: Raise error if differnce is larger than acceptable difference
 #    ....
