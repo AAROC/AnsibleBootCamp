@@ -9,7 +9,7 @@ before_install:
   - docker pull aaroc/code-rade-sl6-ansible
 
 install:
-  - docker run -v $PWD:$PWD -w $PWD aaroc/code-rade-sl6-ansible ansible-playbook -i handson/inventory.lesson1 handson/lesson1.yml -e ntp_server="ntp1.inrim.it"
+  - docker run -v $PWD:$PWD -w $PWD aaroc/code-rade-sl6-ansible ansible-playbook -c local -i handson/inventory.lesson1 handson/lesson1.yml -e ntp_server="ntp1.inrim.it"
 
 
 notifications:
