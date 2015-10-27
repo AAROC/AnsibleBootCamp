@@ -44,4 +44,3 @@
       command: /usr/sbin/ntptime
       register: thetime
       changed_when: false
-    - name: output thetime
