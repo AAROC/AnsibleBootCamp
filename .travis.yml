@@ -1,0 +1,10 @@
+---
+language: bash
+sudo: required
+services: docker
+
+before_install:
+  - docker pull aaroc/code-rade-sl6-ansible
+
+install:
+  - docker run -v $PWD -c "ansible-playbook -i handson/inventory.lesson1 lesson1.yml"
