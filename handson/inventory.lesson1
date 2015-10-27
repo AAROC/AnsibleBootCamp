@@ -5,7 +5,7 @@
 90.147.156.175 ansible_ssh_private_key_file=~/.ssh/ansible-default.key ansible_ssh_user=centos
 
 [Debian]
-90.147.156.176 ansible_ssh_private_key_file=~/.ssh/ansible-default.key ansible_ssh_user=ubuntu
+90.147.156.174 ansible_ssh_private_key_file=~/.ssh/ansible-default.key ansible_ssh_user=ubuntu
 
 [Ubuntu:children]
 Debian
