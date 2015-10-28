@@ -1,0 +1,17 @@
+---
+
+- name: Install serverspec
+  become_user: root
+  command: gem install serverspec
+
+#- name: Uninstall net-ssh too new version
+#  become_user: root
+#  command: gem uninstall net-ssh
+
+#- name: Install net-ssh right version
+#  become_user: root
+#  command: gem install -v 2.7 -no-rdoc -no-ri net-ssh
+
+- name: Test Apache installed correctly
+  become_user: root
+  command: rake spec

@@ -5,3 +5,6 @@ epel_package_url:
 
 base_packages:
   - httpd
+  - ruby
+  - rubygems
+  - rubygem-rake
