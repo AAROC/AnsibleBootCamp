@@ -1,4 +1,8 @@
 ---
+- name: get some variables
+  include_vars: "{{ item }}"
+  with_first_found:
+    - "{{ ansible_os_family }}.yml"
 - name: Ensure that EPEL is present and configure
   yum:
     name: "{{ epel_package[ansible_distribution_major_version] }}"
