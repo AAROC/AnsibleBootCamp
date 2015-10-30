@@ -1,0 +1,255 @@
+% \pdfminorversion=4
+\documentclass[12pt, xcolor={dvipsnames}]{beamer}
+\usepackage{beamerthemeshadow}
+\usepackage{listings}
+\lstset{showstringspaces=false}
+\newcommand\YAMLcolonstyle{\color{red}\mdseries}
+\newcommand\YAMLkeystyle{\color{black}\bfseries}
+\newcommand\YAMLvaluestyle{\color{blue}\mdseries}
+
+\makeatletter
+
+% here is a macro expanding to the name of the language
+% (handy if you decide to change it further down the road)
+\newcommand\language@yaml{yaml}
+
+\expandafter\expandafter\expandafter\lstdefinelanguage
+\expandafter{\language@yaml}
+{
+  keywords={True,False,null,y,n,yes,no},
+  keywordstyle=\color{PineGreen}\bfseries,
+  basicstyle=\YAMLkeystyle,                                 % assuming a key comes first
+  sensitive=false,
+  comment=[l]{\#},
+  morecomment=[s]{/*}{*/},
+  commentstyle=\color{purple}\ttfamily,
+  stringstyle=\YAMLvaluestyle\ttfamily,
+  moredelim=[l][\color{orange}]{\&},
+  moredelim=[l][\color{magenta}]{*},
+  moredelim=**[il][\YAMLcolonstyle{:}\YAMLvaluestyle]{:},   % switch to value style at :
+  morestring=[b]',
+  morestring=[b]",
+  literate =    {---}{{\ProcessThreeDashes}}3
+                {>}{{\textcolor{red}\textgreater}}1
+                {|}{{\textcolor{red}\textbar}}1
+                {\ -\ }{{\mdseries\ -\ }}3,
+}
+
+% switch to key style at EOL
+\lst@AddToHook{EveryLine}{\ifx\lst@language\language@yaml\YAMLkeystyle\fi}
+\makeatother
+
+\newcommand\ProcessThreeDashes{\llap{\color{cyan}\mdseries-{-}-}}
+
+\newenvironment{wideitemize}{\itemize\addtolength{\itemsep}{12pt}}{\enditemize}
+
+\definecolor{links}{HTML}{2A1B81}
+\hypersetup{colorlinks,linkcolor=,urlcolor=links}
+
+\begin{document}
+\title{Ansible in depth: Error handling and Idempotence}
+\author{Marco Fargetta}
+\institute{INFN Sezione di Catania}
+\date{\today}
+
+\frame{\titlepage}
+
+%\frame{\frametitle{Table of contents}\tableofcontents}
+
+
+\section{Error Handling}
+\begin{frame}[t]{Standard Behaviour}
+  \begin{wideitemize}
+    \item Error based on commands and modules return code
+    \item Task error will stop the playbook for the host
+    \begin{itemize}
+      \item Some modules could behave differently
+    \end{itemize}
+    \item In some cases failures require different approaches
+  \end{wideitemize}
+\end{frame}
+
+\begin{frame}[t, fragile]{Stop the playbook}
+  \begin{wideitemize}
+    \item In case of failure the playbook should fail
+    \begin{itemize}
+      \item In case of connected services all the hosts must be configured
+      at the same time
+    \end{itemize}
+    \item In this case the option \alert{\texttt{any\_errors\_fatal}} can be used
+  \end{wideitemize}
+  \begin{block}{Example}
+    \begin{lstlisting}[language=yaml]
+- hosts: somehosts
+  any_errors_fatal: True
+  roles:
+    - myrole
+    \end{lstlisting}
+  \end{block}
+\end{frame}
+
+\begin{frame}[t, fragile]{Ignore errors}
+  \begin{wideitemize}
+    \item Some errors are not really relevant for the configuration
+    \item It is possible to ignore errors with \alert{\texttt{ignore\_errors}}
+  \end{wideitemize}
+  \begin{block}{Example}
+    \begin{lstlisting}[language=yaml, basicstyle=\scriptsize]
+- name: this will not be counted as a failure
+  command: /bin/false
+  ignore_errors: yes
+    \end{lstlisting}
+  \end{block}
+\end{frame}
+
+\begin{frame}[t, fragile]{Override the results}
+  \begin{wideitemize}
+    \item Changes are triggered by the module or the executed commands
+    \item Status change can be controlled with \alert{\texttt{changed\_when}}
+  \end{wideitemize}
+  \begin{block}{Example}
+    \begin{lstlisting}[language=yaml, basicstyle=\scriptsize]
+tasks:
+
+  - shell: /usr/bin/billybass --mode="take me to the river"
+    register: bass_result
+    changed_when: "bass_result.rc != 2"
+
+  # this will never report 'changed' status
+  - shell: wall 'beep'
+    changed_when: False
+  \end{lstlisting}
+  \end{block}
+\end{frame}
+
+\begin{frame}[t, fragile]{What is an error}
+  \begin{wideitemize}
+    \item Error conditions are not always identifiable in the exit
+    status of a command or a module
+    \item Error can be visible in the output
+    \item It is possible to rise the error if some condition is verified
+  \end{wideitemize}
+  \begin{block}{Example}
+    \begin{lstlisting}[language=yaml, basicstyle=\scriptsize]
+- name: this command prints FAILED when it fails
+  command: /usr/bin/example-command -x -y -z
+  register: command_result
+  failed_when: "'FAILED' in command_result.stderr"
+    \end{lstlisting}
+  \end{block}
+\end{frame}
+
+\begin{frame}[t]{Force the handlers}
+  \begin{wideitemize}
+    \item On error all the following tasks will not be executed
+    \item Also notified task will not execute
+    \item This can leave the host in an inconsistent state
+    \item Notified handlers can execute if the \alert{\texttt{force\_handlers}} is specified
+    \begin{itemize}
+      \item It can be specified in the playbook as \texttt{force\_handlers: True}
+      \item It can be provided in the command line as \texttt{--force-handlers}
+      \item It can be specified in the configuration
+    \end{itemize}
+  \end{wideitemize}
+\end{frame}
+
+
+\section{Idempotence}
+
+\begin{frame}[t]{What is it?}
+  \begin{block}{Definition of Idempotent (source Oxford Dictionary)}
+    \begin{quote}
+      Denoting an element of a set which is unchanged in value when multiplied or otherwise operated on by itself
+    \end{quote}
+  \end{block}
+
+  \begin{wideitemize}
+    \item In Mathematics a function is idempotent if $f(x)=f(f(x))$
+    \item What is idempotent in Ansible?
+    \begin{itemize}
+      \item The ability to execute playbook multiple times without changes in the hosts
+    \end{itemize}
+  \end{wideitemize}
+\end{frame}
+
+\begin{frame}[t]{Ansible idempotent playbooks}
+  \begin{wideitemize}
+    \item Ansible modules are idempotent
+    \begin{wideitemize}
+      \item Unfortunately some exceptions are present
+      \item As an example mysql module was not idempotent
+      \begin{itemize}
+        \item It was more a limitation than a future and it could be fixed
+      \end{itemize}
+    \end{wideitemize}
+    \item Run multiple times a playbook should not generate any status change after the first execution
+  \end{wideitemize}
+\end{frame}
+
+\begin{frame}[t]{Idempotence test}
+  \begin{wideitemize}
+    \item Playbook should be tested for the Idempotence
+    \item It is enough to execute multiple run of the same playbook
+    \begin{itemize}
+      \item It is possible to automatise with Jenkins and/or other continuous integration tools
+    \end{itemize}
+    \item Idempotent playbook are more safe for the management of the inventory
+    \begin{itemize}
+      \item It is easier to recognise inconsistent status requiring changes
+    \end{itemize}
+    \item Tasks are not executed if the corresponding status is correct
+  \end{wideitemize}
+\end{frame}
+
+\begin{frame}[t]{Is everything idempotent}
+  \begin{wideitemize}
+    \item Modules are idempotent but they are not the only actions Ansible can perform on remote hosts
+    \item Shell script and remote command are not idempotent because they are always executed if the task is requested
+    \item Playbook can always be idempotent
+  \end{wideitemize}
+\end{frame}
+
+\begin{frame}[t]{Make playbook idempotent}
+  \begin{wideitemize}
+    \item Tasks can have conditions to trigger the execution
+    \item It is possible to retrieve facts from remote hosts
+    \item It is possible to execute command without status change but providing some output
+    \item \alert{Combining conditions with facts and output it is possible to create idempotent tasks from non idempotent commands}
+  \end{wideitemize}
+\end{frame}
+
+\begin{frame}[t, fragile]{Example of idempotent tasks}
+  \begin{lstlisting}[language=yaml, basicstyle=\scriptsize]
+- name: Start ldap server
+  service: name={{ ldap_service }} state=started enabled=yes
+  sudo: yes
+  tags:
+    - LDAP
+
+- name: Retrieve ldap server configuration
+  command: ldapsearch -Y EXTERNAL -H ldapi:/// -b cn=config
+  register: ldap_config
+  changed_when: "False"
+  sudo: yes
+  tags:
+    - LDAP
+
+- name: Copy modules file LDIF
+  copy: src=etc/openldap/slapd.d/{{ ldap_module_file }} dest=/tmp/{{ ldap_module_file }}
+  sudo: yes
+  when: '"memberof" not in ldap_config.stdout'
+  tags:
+    - LDAP
+  \end{lstlisting}
+\end{frame}
+%--- Next Frame ---%
+
+\begin{frame}[t]{Thanks}
+  Examples and other materials in these slides are from the following sources:
+  \begin{wideitemize}
+    \item \href{http://docs.ansible.com/ansible/index.html}{Official Ansible documentation}
+    \item \href{http://tylerturk.com/testing-ansible-idempotency/}{Tyler Turk's blog}
+  \end{wideitemize}
+\end{frame}
+
+\end{document}
