@@ -1,0 +1,5 @@
+---
+base_packages:
+  - apache2
+  - ruby
+  - rake

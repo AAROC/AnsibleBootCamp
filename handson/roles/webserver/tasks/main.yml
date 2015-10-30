@@ -1,0 +1,26 @@
+---
+# tasks file for webserver
+- include_vars: "{{ item }}"
+  with_first_found:
+    - "../vars/packages-{{ ansible_os_family }}.yml"
+
+- include: packages-RedHat.yml
+  when: ansible_os_family == 'RedHat'
+
+- include: packages-Debian.yml
+  when: ansible_os_family == 'Debian'
+
+- include: configuration-RedHat.yml
+  when: ansible_os_family == 'RedHat'
+
+- include: configuration-Debian.yml
+  when: ansible_os_family == 'Debian'
+
+#- include: "firewall-RedHat.yml"
+#  when: ansible_os_family == 'RedHat'
+
+- include: test.yml
+#- include: "firewall-RedHat.yml"
+#  when: ansible_os_family == 'RedHat'
+
+- include: test.yml

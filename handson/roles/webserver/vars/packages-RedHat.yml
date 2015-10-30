@@ -1,0 +1,10 @@
+---
+epel_package_url:
+  '6': https://ftp.fau.de/epel/6/x86_64/epel-release-6-8.noarch.rpm
+  '7': https://ftp.fau.de/epel/7/x86_64/e/epel-release-7-5.noarch.rpm
+
+base_packages:
+  - httpd
+  - ruby
+  - rubygems
+  - rubygem-rake

@@ -23,6 +23,8 @@ filegen clockstats file clockstats type day enable
 server {{ server }}
 {% endfor %}
 
+# Use Ubuntu's ntp server as a fallback.
+server ntp.ubuntu.com
 
 # Access control configuration; see /usr/share/doc/ntp-doc/html/accopt.html for
 # details.  The web page <http://support.ntp.org/bin/view/Support/AccessRestrictions>

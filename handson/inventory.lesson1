@@ -1,16 +1,4 @@
-# Your first inventory. Only contains localhost
-90.147.156.175
-90.147.156.174
+localhost
 
-# Choose your OS and add your localhost to that group
-[CentOS]
-90.147.156.175 ansible_ssh_private_key_file=~/.ssh/ansible-default.key ansible_ssh_user=centos
-90.147.156.174 ansible_ssh_private_key_file=~/.ssh/ansible-default.key ansible_ssh_user=centos
-
-
-#[Debian]
-# ansible_ssh_private_key_file=~/.ssh/ansible-default.key #ansible_ssh_user=ubuntu
-#
-
-#[Ubuntu:children]
-#Debian
+[Debian]
+localhost
