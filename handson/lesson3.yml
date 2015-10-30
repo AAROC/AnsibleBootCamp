@@ -1,0 +1,15 @@
+---
+# lesson 3 write my first role
+
+- hosts: all
+  #accelerate: true
+  name: Check the basic connectivity
+  tasks:
+  - ping:
+
+- hosts: all
+  #accelerate: true
+  name: Set up the webserver
+  roles:
+  - webserver
+

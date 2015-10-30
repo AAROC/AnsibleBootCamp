@@ -1,17 +1,18 @@
 ---
 # This is an example .travis.
 # If you've forked this repo, please make sure  to change the notifications section
+
 language: bash
 sudo: required
 services: docker
 
 before_install:
-#  - docker pull aaroc/code-rade-sl6-ansible
-  - sudo apt-get install ansible
+  - docker pull aaroc/code-rade-sl6-ansible
+  - docker pull aaroc/code-rade-u1404-ansible
 
 install:
-#  - docker run aaroc/code-rade-sl6-ansible -v $PWD "ansible-playbook -i handson/inventory.lesson1 lesson1.yml"
-  - ansible-playbook -i handson/inventory.lesson1 lesson1.yml
+  - docker run -v $PWD:$PWD -w $PWD aaroc/code-rade-sl6-ansible ansible-playbook -c local -i handson/inventory.localhost handson/lesson1.yml
+  - docker run -v $PWD:$PWD -w $PWD aaroc/code-rade-u1404-ansible ansible-playbook -c local -i handson/inventory.localhost handson/lesson3.yml
 
 notifications:
   slack:

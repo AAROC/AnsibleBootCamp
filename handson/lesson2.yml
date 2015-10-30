@@ -14,6 +14,7 @@
     user:
       name: "{{ item.name }}"
       password: "{{ item.password }}"
+      home: "/bin/bash/{{ item.name }}"
     with_items: users
 
 - hosts: all
