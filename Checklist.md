@@ -70,7 +70,14 @@ Copy below this line
         - [ ]  student 2
         - [ ]  etc
       - [ ]  Create your inventory file for the event. Add the learner machines to `training-lab` group.
+			- [ ] Create the `group_vars` and passwords file. You will use this to save sensitive variables.
+				- [ ] The group variables for the event should be created using the location of the event, e.g. `entebbe.yml`. Put this in `group_vars`
+				- [ ] The passwords should have the same name, prefixed with "passwords-", _e.g._ : `passwords-entebbe.yml`
       - [ ]  Run the `training-lab.yml` playbook against the training lab group : `ansible-playbook -i inventories/<event-inventory>.ini -l training-lab training-lab.yml`
 ```
 ----
 Copy above this line
+
+### Using Ansible to build the lab
+
+A playbook is provided for you to set up the lab.
