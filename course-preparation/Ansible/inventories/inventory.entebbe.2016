@@ -5,3 +5,6 @@ ip.address.two.
 # groups 
 [classroom]
 ip.address.three
+
+[facilitator-machines]
+bruce.eduroam.me ansible_user='ubuntu'
