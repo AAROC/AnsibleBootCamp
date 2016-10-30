@@ -10,84 +10,69 @@
   name: Low-down and dirty
   gather_facts: false
   tasks:
-    - name: Pick up sensitive vars
-      include_vars:
-        file: "group_vars/passwords-{{ site_name }}.yml"
+  - name: Pick up sensitive vars
+    include_vars:
+      file: "group_vars/passwords-{{ site_name }}.yml"
 
-    - name: Announce the setup
-      slack:
-        domain: ubuntunet.slack.com
-        token: "{{ slack_token }}"
-        msg: "Running training-lab setup for {{ inventory_hostname }} at {{ site_name }} :worried: "
-        channel: "#devops"
-        username: "Ansible on {{ inventory_hostname }}"
-        link_names: 1
-        parse: 'full'
+  - name: Announce the setup
+    slack:
+      domain: ubuntunet.slack.com
+      token: "{{ slack_token }}"
+      msg: "Running training-lab setup for {{ inventory_hostname }} at {{ site_name }} :worried: "
+      channel: "#devops"
+      username: "Ansible on {{ inventory_hostname }}"
+      link_names: 1
+      parse: 'full'
 
-    - name: Low down dirty setup
-      become: true
-      raw: "apt-get -y install {{ item }}"
-      with_items: "{{ managed_prerequisites }}"
+  - name: Low down dirty setup
+    become: true
+    raw: "apt-get -y install {{ item }}"
+    with_items: "{{ managed_prerequisites }}"
 
-    - name: Announce the outcome
-      slack:
-        domain: ubuntunet.slack.com
-        token: "{{ slack_token }}"
-        msg: "Running training-lab setup for {{ inventory_hostname }} at {{ site_name }} :ok_hand: "
-        channel: "#devops"
-        username: "Ansible on {{ inventory_hostname }}"
-        link_names: 1
-        parse: 'full'
+  - name: Announce the outcome
+    slack:
+      domain: ubuntunet.slack.com
+      token: "{{ slack_token }}"
+      msg: "Running training-lab setup for {{ inventory_hostname }} at {{ site_name }} :ok_hand: "
+      channel: "#devops"
+      username: "Ansible on {{ inventory_hostname }}"
+      link_names: 1
+      parse: 'full'
 
 - hosts: training-lab
   name: Deploy Ansible onto the lab
   tasks:
   - name: Pick up sensitive vars
-     include_vars:
-       file: "passwords-{{ site_name }}.yml"
+    include_vars:
+      file: "group_vars/passwords-{{ site_name }}.yml"
   - name: Announce the Config play
-     slack:
-       domain: ubuntunet.slack.com
-       token: "{{ slack_token }}"
-       msg: "Running training-lab configuration on {{ inventory_hostname }} at {{ site_name }} :worried: "
-       channel: "#devops"
+    slack:
+      domain: ubuntunet.slack.com
+      token: "{{ slack_token }}"
+      msg: "Running training-lab configuration on {{ inventory_hostname }} at {{ site_name }} :worried: "
+      channel: "#devops"
       username: "Ansible on {{ inventory_hostname }}"
       link_names: 1
       parse: 'full'
   - name: Install some basic stuff
-    yum:
+    become: true
+    package:
       name: "{{ item }}"
       state: present
-    sudo: true
     with_items: "{{ prerequisites[ansible_os_family]}}"
 
-
-  - name: Install pip for Ansible prerequisites
-    easy_install:
-      name: pip
-    sudo: true
-
   - name: Install Ansible
+    become: true
     pip:
-      name: {{ item }} state=present
-    sudo: true
-    with_items:
-      - paramiko
-      - PyYAML
-      - Jinja2
-      - httplib2
-  #    - backports.ssl_match_hostname  # this is needed for the newer instance of slack, apparently ?
-    sudo: true
+      name: ansible
+      state: present
 
-  - name: Hand Ansible to ansible
-    sudo: true
-    file: name=/opt/ansible state=directory owner=ansible group=ansible
-
-
-  - name: Get Ansible
-    git:
-      repo: https://github.com/ansible/ansible.git
-      dest: /opt/ansible/
-      recursive: true
-    sudo: false
-    sudo_user: ansible
+  - name: Announce the Config play outcome
+    slack:
+      domain: ubuntunet.slack.com
+      token: "{{ slack_token }}"
+      msg: "{{ inventory_hostname }} at {{ site_name }} now knows kung-fu :neo:"
+      channel: "#devops"
+      username: "Ansible on {{ inventory_hostname }}"
+      link_names: 1
+      parse: 'full'
