@@ -1,0 +1,7 @@
+# All student machines
+ip.address.one.
+ip.address.two.
+
+# groups 
+[classroom]
+ip.address.three
