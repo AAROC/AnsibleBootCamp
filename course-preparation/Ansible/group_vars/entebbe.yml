@@ -1,0 +1,20 @@
+---
+site_name: entebbe
+ansible_user: ubuntu
+prerequisites:
+  Debian:
+    - vim
+    - make
+    - git
+    - python-pip
+    - python-setuptools
+    - python-devel
+    - gcc
+  RedHat:
+    - vim
+    - make
+    - git
+    - python-pip
+    - python-setuptools
+    - python-devel
+    - gcc
