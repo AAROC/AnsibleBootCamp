@@ -9,6 +9,7 @@ prerequisites:
     - python-pip
     - python-setuptools
     - python-dev
+    - libssl-dev
     - gcc
   RedHat:
     - vim
