@@ -76,3 +76,9 @@
       username: "Ansible on {{ inventory_hostname }}"
       link_names: 1
       parse: 'full'
+
+# - name: Setup the users
+#   tasks:
+#     - name: get the user name
+#     - name: get the ssh key
+#     - name: add the user
