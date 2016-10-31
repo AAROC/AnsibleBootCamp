@@ -11,6 +11,8 @@ prerequisites:
     - python-dev
     - libssl-dev
     - gcc
+    - nano
+    - joe
   RedHat:
     - vim
     - make
@@ -20,6 +22,28 @@ prerequisites:
     - python-devel
     - gcc
 
-# The list of users which represent the various orgs.
-github_user_keys:
-  - csir: brucellino
+# Add participants in this list - it is used to set  up the machines for them.
+  # - name: Bruce  Becker
+  #   org: CSIR
+  #   username: brucellino
+  #   git:
+  #     name: Bruce Becker
+  #     email: brucellino@gmail.com
+  #     editor: vim
+  #     github: brucellino
+
+participants:
+  - name: Bruce  Becker                      # Real name of the person
+    org: CSIR                                # Organisation/team they work in
+    username: brucellino                     # username on the lab machine
+    github: brucellino                       # github user account
+    git:                                     # git configuration on the lab machines
+      user:
+        name: Bruce Becker
+        email: brucellino@gmail.com
+      core:
+        editor:
+          name: vim
+          package:
+            RedHat: vim
+            Debian: vim

@@ -81,3 +81,34 @@ Copy above this line
 ### Using Ansible to build the lab
 
 A playbook is provided for you to set up the lab.
+
+### Feedback
+
+- [ ] Ensure that there is some kind of feedback form.
+
+# During the event
+
+  - [ ] Ensure that the attendees have registered to the event so that you have a clear idea of who actually participated
+	- [ ] Remind the attendees that there is feedback survey
+
+## Day 1
+
+  - [ ] Ensure that the slides are up to date
+	- [ ] Checkup on the git lesson repos
+		-	[ ] user 1
+		- [ ] user n
+	- [ ] Checkup on repo for the bootcamp
+		- Lesson 1 :
+			- Task 1 : Add inventory
+			- Task 2 : Add group in inventory
+			- Task 3 : Add `ansible.cfg`
+		- Lesson 2 :
+			- Task 1 : Playbook with basic plays, no  roles.
+
+## Day 2
+
+	- [ ] Don't forget to be Awesome.
+
+# After the event
+
+ - [ ]
