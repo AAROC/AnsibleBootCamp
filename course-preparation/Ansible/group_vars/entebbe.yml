@@ -1,0 +1,25 @@
+---
+site_name: entebbe
+ansible_user: ubuntu
+prerequisites:
+  Debian:
+    - vim
+    - make
+    - git
+    - python-pip
+    - python-setuptools
+    - python-dev
+    - libssl-dev
+    - gcc
+  RedHat:
+    - vim
+    - make
+    - git
+    - python-pip
+    - python-setuptools
+    - python-devel
+    - gcc
+
+# The list of users which represent the various orgs.
+github_user_keys:
+  - csir: brucellino

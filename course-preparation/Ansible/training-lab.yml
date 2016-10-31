@@ -1,0 +1,84 @@
+---
+# Ansible playbook to prepare the course machines ... to execute Ansible.
+# Before you run this, make sure that the hosts can be managed.
+# run this once-off:
+# ansible all -i inventory.ini -m raw '[apt-get,yum] install python2.7 python-simplejson'
+
+# This task doesn't have the benefit of retrieved facts, so you can't do any
+# kind of host look up. You have to just know what kind of host you have
+- hosts: all
+  name: Low-down and dirty
+  gather_facts: false
+  tasks:
+  - name: Pick up sensitive vars
+    include_vars:
+      file: "group_vars/passwords-{{ site_name }}.yml"
+
+  - name: Announce the setup
+    slack:
+      domain: ubuntunet.slack.com
+      token: "{{ slack_token }}"
+      msg: "Running training-lab setup for {{ inventory_hostname }} at {{ site_name }} :worried: "
+      channel: "#devops"
+      username: "Ansible on {{ inventory_hostname }}"
+      link_names: 1
+      parse: 'full'
+
+  - name: Low down dirty setup
+    become: true
+    raw: "apt-get -y install {{ item }}"
+    with_items: "{{ managed_prerequisites }}"
+
+  - name: Announce the outcome
+    slack:
+      domain: ubuntunet.slack.com
+      token: "{{ slack_token }}"
+      msg: "Running training-lab setup for {{ inventory_hostname }} at {{ site_name }} :ok_hand: "
+      channel: "#devops"
+      username: "Ansible on {{ inventory_hostname }}"
+      link_names: 1
+      parse: 'full'
+
+- hosts: training-lab
+  name: Deploy Ansible onto the lab
+  tasks:
+  - name: Pick up sensitive vars
+    include_vars:
+      file: "group_vars/passwords-{{ site_name }}.yml"
+  - name: Announce the Config play
+    slack:
+      domain: ubuntunet.slack.com
+      token: "{{ slack_token }}"
+      msg: "Running training-lab configuration on {{ inventory_hostname }} at {{ site_name }} :worried: "
+      channel: "#devops"
+      username: "Ansible on {{ inventory_hostname }}"
+      link_names: 1
+      parse: 'full'
+  - name: Install some basic stuff
+    become: true
+    package:
+      name: "{{ item }}"
+      state: present
+    with_items: "{{ prerequisites[ansible_os_family]}}"
+
+  - name: Install Ansible
+    become: true
+    pip:
+      name: ansible
+      state: present
+
+  - name: Announce the Config play outcome
+    slack:
+      domain: ubuntunet.slack.com
+      token: "{{ slack_token }}"
+      msg: "{{ inventory_hostname }} at {{ site_name }} now knows kung-fu :neo:"
+      channel: "#devops"
+      username: "Ansible on {{ inventory_hostname }}"
+      link_names: 1
+      parse: 'full'
+
+# - name: Setup the users
+#   tasks:
+#     - name: get the user name
+#     - name: get the ssh key
+#     - name: add the user
