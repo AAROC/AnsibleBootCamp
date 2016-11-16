@@ -1,4 +1,3 @@
 # Ansible Lesson 2 :
 
-  1. Vault
-  
+  1. Inventory
