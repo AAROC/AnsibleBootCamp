@@ -1,4 +1,9 @@
-Installing Ansible is described at [the Ansible documentation site](http://docs.ansible.com/ansible/intro_installation.html)
+# Installing Ansible
+
+Installing Ansible is described at [the Ansible documentation site](http://docs.ansible.com/ansible/intro_installation.html). The reccommended way to install Ansible uis to use pip :
+
+`pip install ansible`
+
 
 Installing Ansible:
 
@@ -24,4 +29,4 @@ git clone https://github.com/ansible/ansible --recursive
 
 # Questions
 
-  1. Does Ansible use virtualenv ? 
+  1. Does Ansible use virtualenv ?
