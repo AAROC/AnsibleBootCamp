@@ -22,16 +22,6 @@ prerequisites:
     - python-devel
     - gcc
 
-# Add participants in this list - it is used to set  up the machines for them.
-  # - name: Bruce  Becker
-  #   org: CSIR
-  #   username: brucellino
-  #   git:
-  #     name: Bruce Becker
-  #     email: brucellino@gmail.com
-  #     editor: vim
-  #     github: brucellino
-
 participants:
   - name: Bruce  Becker                      # Real name of the person
     org: CSIR                                # Organisation/team they work in
@@ -47,3 +37,18 @@ participants:
           package:
             RedHat: vim
             Debian: vim
+
+  - name: Ntuthuko Sambo                      # Real name of the person
+    org: CSIR                                # Organisation/team they work in
+    username: Ntu2ko2002                     # username on the lab machine
+    github: Ntu2ko2002                       # github user account
+    git:                                     # git configuration on the lab machines
+      user:
+        name: Ntuthuko Sambo
+        email: ntuthuko@sanren.ac.za
+      core:
+        editor:
+          name: vi
+          package:
+            RedHat: vi
+            Debian: vi
