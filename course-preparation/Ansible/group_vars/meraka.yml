@@ -47,3 +47,17 @@ participants:
           package:
             RedHat: vim
             Debian: vim
+ - name: Johann Hugo                      # Real name of the person
+    org: CSIR                                # Organisation/team they work in
+    username: jhugo                          # username on the lab machine
+    github: JOHugo                           # github user account
+    git:                                     # git configuration on the lab machines
+      user:
+        name: Johann Hugo
+        email: jhugo.meraka@gmail.com
+      core:
+        editor:
+          name: vi
+          package:
+            RedHat: vi
+            Debian: vi
