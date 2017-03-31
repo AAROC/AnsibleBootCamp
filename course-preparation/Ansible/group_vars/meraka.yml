@@ -47,3 +47,18 @@ participants:
           package:
             RedHat: vim
             Debian: vim
+            
+  - name: Sakhi  Hadebe                       # Real name of the person
+    org: CSIR                                 # Organisation/team they work in
+    username: sakhihadebe                     # username on the lab machine
+    github: sakhi@sanren.ac.za                # github user account
+    git:                                      # git configuration on the lab machines
+      user:
+        name: Sakhi Hadebe
+        email: sakhi@sanren.ac.za
+      core:
+        editor:
+          name: vim
+          package:
+            RedHat: vim
+            Debian: vim
