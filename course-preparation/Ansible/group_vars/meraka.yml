@@ -47,6 +47,37 @@ participants:
           package:
             RedHat: vim
             Debian: vim
+
+  - name: Siju Mammen                      # Real name of the person
+    org: CSIR                                # Organisation/team they work in
+    username: samshive                     # username on the lab machine
+    github: samshive                       # github user account
+    git:                                     # git configuration on the lab machines
+      user:
+        name: samshive
+        email: samshive@gmail.com
+      core:
+        editor:
+          name: nano
+          package:
+            RedHat: nano
+            Debian: nano
+
+- name: John Hay                      # Real name of the person
+    org: CSIR                                # Organisation/team they work in
+    username: jhay                     # username on the lab machine
+    github: JohnHay                       # github user account
+    git:                                     # git configuration on the lab machines
+      user:
+        name: John Hay
+        email: john@sanren.ac.za
+      core:
+        editor:
+          name: vim
+          package:
+            RedHat: vim
+            Debian: vim
+
 - name: Claude Fortune                      # Real name of the person
     org: CSIR                                # Organisation/team they work in
     username: cfortune                     # username on the lab machine
