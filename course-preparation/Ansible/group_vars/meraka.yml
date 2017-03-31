@@ -47,3 +47,19 @@ participants:
           package:
             RedHat: vim
             Debian: vim
+            
+            
+    - name: Kasadra Pillay                      # Real name of the person
+    org: CSIR                                # Organisation/team they work in
+    username: linux                     # username on the lab machine
+    github: Kasandra-SANReN                       # github user account
+    git:                                     # git configuration on the lab machines
+      user:
+        name: Kasandra
+        email: kasandra@sanren.ac.za
+      core:
+        editor:
+          name: vim
+          package:
+            RedHat: vim
+            Debian: vim
