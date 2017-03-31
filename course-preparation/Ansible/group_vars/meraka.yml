@@ -47,3 +47,17 @@ participants:
           package:
             RedHat: vim
             Debian: vim
+  - name: funny guy                      # Real name of the person
+    org: loony bin                                # Organisation/team they work in
+    username: funny                     # username on the lab machine
+    github: funnyguy                       # github user account
+    git:                                     # git configuration on the lab machines
+      user:
+        name: Bruce Becker
+        email: brucellino@gmail.com
+      core:
+        editor:
+          name: vim
+          package:
+            RedHat: vim
+            Debian: vim
