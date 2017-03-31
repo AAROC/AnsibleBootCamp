@@ -1,0 +1,4 @@
+background.odp filter=lfs diff=lfs merge=lfs -text
+Deeper[[:space:]]into[[:space:]]Ansible.odp filter=lfs diff=lfs merge=lfs -text
+introduction[[:space:]]to[[:space:]]ansible.odp filter=lfs diff=lfs merge=lfs -text
+background.pdf filter=lfs diff=lfs merge=lfs -text
