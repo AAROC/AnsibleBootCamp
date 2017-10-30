@@ -80,7 +80,7 @@
 # This is a single loop over participants - should be done in a block
 - name: Setup the users
   hosts: all
-  - tasks:
+  tasks:
     - name: Add the participant
       user:
         name: "{{ item.username }}"
@@ -88,7 +88,7 @@
         state: present
         createhome: true
         generate_ssh_key: true
-     with_items: "{{ participants }}"
+      with_items: "{{ participants }}"
 
     - name: Ensure that the participant ssh key on Github is in authorized keys
       authorized_key:
