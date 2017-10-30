@@ -63,7 +63,7 @@ participants:
             RedHat: nano
             Debian: nano
 
-- name: John Hay                      # Real name of the person
+  - name: John Hay                      # Real name of the person
     org: CSIR                                # Organisation/team they work in
     username: jhay                     # username on the lab machine
     github: JohnHay                       # github user account
@@ -78,7 +78,7 @@ participants:
             RedHat: vim
             Debian: vim
 
-- name: Claude Fortune                      # Real name of the person
+  - name: Claude Fortune                      # Real name of the person
     org: CSIR                                # Organisation/team they work in
     username: cfortune                     # username on the lab machine
     github: cfortune-csir                       # github user account
@@ -86,6 +86,14 @@ participants:
       user:
         name: Claude Fortune
         email: cfortune@csir.co.za
+  - name: funny guy                      # Real name of the person
+    org: loony bin                                # Organisation/team they work in
+    username: funny                     # username on the lab machine
+    github: funnyguy                       # github user account
+    git:                                     # git configuration on the lab machines
+      user:
+        name: Bruce Becker
+        email: brucellino@gmail.com
       core:
         editor:
           name: vim
