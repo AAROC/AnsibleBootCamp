@@ -82,15 +82,17 @@
   hosts: all
   tasks:
     - name: Add the participant
+      become: true
       user:
         name: "{{ item.username }}"
         comment: "User added for {{ site_name }} DevOps bootcamp"
         state: present
         createhome: true
-        generate_ssh_key: true
+        generate_ssh_key: false
       with_items: "{{ participants }}"
 
     - name: Ensure that the participant ssh key on Github is in authorized keys
+      become: true
       authorized_key:
         exclusive: no
         manage_dir: yes
@@ -99,10 +101,11 @@
         state: present
       with_items: "{{ participants }}"
 
-# assert that the preferred package is in the prerequisites ?
+    # assert that the preferred package is in the prerequisites ?
     - name: Assert that the preferred editor is in prerequisites
       assert:
-        that: "{{ item.git.core.package[ansible_os_family ]}} in prerequisites[ansible_os_family]"
+        that: "'{{ item.git.core.editor.package[ansible_os_family ]}}' in prerequisites[ansible_os_family]"
+      with_items: "{{ participants }}"
 
     # - name: Ensure that the preferred editor is available
     #   package:
@@ -115,3 +118,4 @@
         name: core.editor
         value: "{{ item.git.core.editor}}"
         scope: global
+      with_items: "{{ participants }}"
