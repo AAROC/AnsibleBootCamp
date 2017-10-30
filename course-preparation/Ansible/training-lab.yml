@@ -15,7 +15,8 @@
       file: "group_vars/passwords-{{ site_name }}.yml"
 
   - name: Announce the setup
-    slack:
+    local_action:
+      module: slack
       domain: ubuntunet.slack.com
       token: "{{ slack_token }}"
       msg: "Running training-lab setup for {{ inventory_hostname }} at {{ site_name }} :worried: "
