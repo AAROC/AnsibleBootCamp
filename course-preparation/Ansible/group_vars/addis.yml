@@ -1,8 +1,19 @@
 ---
-site_name: entebbe
+site_name: addis
 ansible_user: ubuntu
 prerequisites:
   Debian:
+    - vim
+    - make
+    - git
+    - python-pip
+    - python-setuptools
+    - python-dev
+    - libssl-dev
+    - gcc
+    - nano
+    - joe
+  Ubuntu:
     - vim
     - make
     - git
