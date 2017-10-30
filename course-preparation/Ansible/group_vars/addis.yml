@@ -13,17 +13,6 @@ prerequisites:
     - gcc
     - nano
     - joe
-  Ubuntu:
-    - vim
-    - make
-    - git
-    - python-pip
-    - python-setuptools
-    - python-dev
-    - libssl-dev
-    - gcc
-    - nano
-    - joe
   RedHat:
     - vim
     - make
