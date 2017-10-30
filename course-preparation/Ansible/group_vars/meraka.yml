@@ -47,6 +47,7 @@ participants:
           package:
             RedHat: vim
             Debian: vim
+<<<<<<< HEAD
 
   - name: Siju Mammen                      # Real name of the person
     org: CSIR                                # Organisation/team they work in
@@ -86,6 +87,16 @@ participants:
       user:
         name: Claude Fortune
         email: cfortune@csir.co.za
+=======
+  - name: funny guy                      # Real name of the person
+    org: loony bin                                # Organisation/team they work in
+    username: funny                     # username on the lab machine
+    github: funnyguy                       # github user account
+    git:                                     # git configuration on the lab machines
+      user:
+        name: Bruce Becker
+        email: brucellino@gmail.com
+>>>>>>> 17a6215a80fc03f81da12fc2e2d46e1c5a391690
       core:
         editor:
           name: vim
