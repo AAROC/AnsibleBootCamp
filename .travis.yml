@@ -8,7 +8,7 @@ env:
   - OS=ubuntu16.10
   - OS=centos7
 before_install:
-- docker pull aaroc/ansible-ready-${OS}
+- docker pull quay.io/aaroc/ansible-ready-${OS}
 install:
 - docker run -v $PWD:$PWD -w $PWD aaroc/ansible-ready-${OS}  ansible-playbook -c local
   -i handson/inventory.localhost handson/lesson1.yml
