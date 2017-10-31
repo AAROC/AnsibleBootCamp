@@ -1,12 +1,12 @@
 ---
 name: Abdulkarim Msangi                   # Real name of the person
-  org: TERNET                                # Organisation/team they work in
-  username: abms                     # username on the lab machine
-  github: abmsangi@gmail.com                       # github user account
-  git:                                     # git configuration on the lab machines
-    user:
-      name: abdulkarim msangi
-      email: abmsangi@gmail.com
+org: TERNET                                # Organisation/team they work in
+username: abms                     # username on the lab machine
+github: abmsangi@gmail.com                       # github user account
+git:                                     # git configuration on the lab machines
+  user:
+    name: abdulkarim msangi
+    email: abmsangi@gmail.com
     core:
       editor:
         name: vim
