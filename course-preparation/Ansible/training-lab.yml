@@ -112,6 +112,13 @@
         state: present
       with_fileglob: "group_vars/participants-{{site-name}}/*"
 
+    - name: Ensure that the user is in sudoers
+      lineinfile:
+        line: "{{item.username}}    ALL=NOPASSWD: ALL"
+        file: /etc/sudoers
+        validate: /usr/sbin/visudo -cf %s
+      with_fileglob: "group_vars/participants-addis/*"
+
 # assert that the preferred package is in the prerequisites ?
     - name: Assert that the preferred editor is in prerequisites
       assert:
