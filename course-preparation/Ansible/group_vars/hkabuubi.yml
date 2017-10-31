@@ -1,0 +1,15 @@
+---
+name: Hellen Nakawungu                      # Real name of the person
+    org: RENU                               # Organisation/team they work in
+    username: hellen                     # username on the lab machine
+    github: hellen                      # github user account
+    git:                                     # git configuration on the lab machines
+      user:
+        name: Hellen Nakawungu
+        email: hnakawungu@renu.ac.ug
+      core:
+        editor:
+          name: vim
+          package:
+             RedHat: vim
+             Debian: vim
