@@ -17,13 +17,16 @@
   - name: Announce the setup
     local_action:
       module: slack
-      domain: ubuntunet.slack.com
+      domain: "{{slack_domain}}"
       token: "{{ slack_token }}"
       msg: "Running training-lab setup for {{ inventory_hostname }} at {{ site_name }} :worried: "
       channel: "#devops"
       username: "Ansible on {{ inventory_hostname }}"
       link_names: 1
       parse: 'full'
+    when: chat_service = 'slack'
+    tags: 
+      - slack
 
   - name: Low down dirty setup
     become: true
@@ -32,13 +35,16 @@
 
   - name: Announce the outcome
     slack:
-      domain: ubuntunet.slack.com
+      domain: "{{ slack_domain }}"
       token: "{{ slack_token }}"
       msg: "Running training-lab setup for {{ inventory_hostname }} at {{ site_name }} :ok_hand: "
       channel: "#devops"
       username: "Ansible on {{ inventory_hostname }}"
       link_names: 1
       parse: 'full'
+    when: chat_service = 'slack'
+    tags:
+    - slack
 
 - hosts: training-lab
   name: Deploy Ansible onto the lab
@@ -55,6 +61,9 @@
       username: "Ansible on {{ inventory_hostname }}"
       link_names: 1
       parse: 'full'
+    when: chat_service = 'slack'
+    tags: 
+      - slack
   - name: Install some basic stuff
     become: true
     package:
@@ -70,13 +79,16 @@
 
   - name: Announce the Config play outcome
     slack:
-      domain: ubuntunet.slack.com
+      domain: "{{ slack_domain}}"
       token: "{{ slack_token }}"
       msg: "{{ inventory_hostname }} at {{ site_name }} now knows kung-fu :neo:"
       channel: "#devops"
       username: "Ansible on {{ inventory_hostname }}"
       link_names: 1
       parse: 'full'
+    when: chat_service = 'slack'
+    tags: 
+      - slack
 
 # This is a single loop over participants - should be done in a block
 - name: Setup the users
@@ -89,7 +101,7 @@
         state: present
         createhome: true
         generate_ssh_key: true
-      with_items: "{{ participants }}"
+      with_fileglob: "group_vars/participants-{{ site_name }}/*"
 
     - name: Ensure that the participant ssh key on Github is in authorized keys
       authorized_key:
@@ -98,7 +110,7 @@
         user: "{{ item.username }}"
         key: "https://github.com/{{ item.github }}.keys"
         state: present
-      with_items: "{{ participants }}"
+      with_fileglob: "group_vars/participants-{{site-name}}/*"
 
 # assert that the preferred package is in the prerequisites ?
     - name: Assert that the preferred editor is in prerequisites
@@ -116,3 +128,15 @@
         name: core.editor
         value: "{{ item.git.core.editor}}"
         scope: global
+    - name: Announce the Config play outcome
+      slack:
+        domain: "{{ slack_domain}}"
+        token: "{{ slack_token }}"
+        msg: "All the base of {{ inventory_hostname }} at {{ site_name }}  belong to :neo:"
+        channel: "#devops"
+        username: "Ansible on {{ inventory_hostname }}"
+        link_names: 1
+        parse: 'full'
+      when: chat_service = 'slack'
+      tags: 
+        - slack
