@@ -1,0 +1,14 @@
+  - name: Testy McBuildface                     # Real name of the person
+    org: Umbrella                    # Organisation/team they work in
+    username: jenkinssagrid             # username on the lab machine
+    github: jenkinssagrid                       # github user account
+    git:                                     # git configuration on the lab machines
+      user:
+        name: Dr. Testy McBuildFace
+        email: jenkinssagrid@gmail.com
+      core:
+        editor:
+          name: vim
+          package:
+            RedHat: vim
+            Debian: vim
