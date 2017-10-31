@@ -19,7 +19,7 @@ install:
 
 script:
   - cd course-preparation/Ansible
-  - ansible-playbook -c local -i localhost, -C training-lab.yml
+  - ansible-playbook -c local -i localhost, -C training-lab.yml -e site_name=testing
   - ansible-playbook -c local -i localhost, training-lab.yml -e site_name=testing
 
 notifications:
