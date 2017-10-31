@@ -1,32 +1,30 @@
----
-# This is an example .travis.
-# If you've forked this repo, please make sure  to change the notifications section
 language: python
 sudo: required
 services: docker
 env:
   matrix:
-    - OS=centos6
-    - OS=ubuntu14.04
-    - OS=ubuntu16.10
-    - OS=centos7
+  - OS=centos6
+  - OS=ubuntu14.04
+  - OS=ubuntu16.10
+  - OS=centos7
 before_install:
-  - docker pull aaroc/ansible-ready-${OS}
-
+- docker pull aaroc/ansible-ready-${OS}
 install:
-  - docker run -v $PWD:$PWD -w $PWD aaroc/ansible-ready-${OS}  ansible-playbook -c local -i handson/inventory.localhost handson/lesson1.yml
-  - docker run -v $PWD:$PWD -w $PWD aaroc/ansible-ready-${OS} ansible-playbook -c local -i handson/inventory.localhost handson/lesson3.yml
-  - sudo pip install ansible
-
+- docker run -v $PWD:$PWD -w $PWD aaroc/ansible-ready-${OS}  ansible-playbook -c local
+  -i handson/inventory.localhost handson/lesson1.yml
+- docker run -v $PWD:$PWD -w $PWD aaroc/ansible-ready-${OS} ansible-playbook -c local
+  -i handson/inventory.localhost handson/lesson3.yml
+- sudo pip install ansible
 script:
-  - cd course-preparation/Ansible
-  - ansible-playbook -c local -i localhost, -C training-lab.yml -e site_name=testing
-  - ansible-playbook -c local -i localhost, training-lab.yml -e site_name=testing
-
+- cd course-preparation/Ansible
+- ansible-playbook -c local -i localhost, -C training-lab.yml -e site_name=testing
+- ansible-playbook -c local -i localhost, training-lab.yml -e site_name=testing
 notifications:
+  webhooks:
+    on_success: change
+    on_failure: always # default: always
+    on_start: change   # default: never
+    on_cancel: always # default: always
+    on_error: always # default: always
   slack:
-    rooms:
-      - ansible4devops2015:It5SDeYANNXDtXh6YmbmO6Rh#testing
-    on_success: always
-    on_failure: always
-    on_start: always
+    secure: Bko15pWpKN9ndvUGESTDwX/6KL2boCb25ZLoG55gnzggGkZDZ8p/QtcMP5Ro2Q3aLFYnjXyFUalqfn0ejUEzAp4VC8irwsnPDARhsvTh1sClwrVYI6hhTfxGUPkjNCG64/Y3weDD5ZmCW/k1s4ylK4enVGvMSy4/6gayM5qyjGuQ/eYIAlqJnkzyBjUHcIDGVVAjSf0w6/IF9MZ5zotQUObvVPhrWNX+KkNTUjp7reHT4lLHN6OVpDv10RQJaAwQPxAZOV+Lb03F1e6xZ4st3fKYWK/+nv5oAOgZx8Q6IuIY2ax6qpzF8AF+SAapAXIp77irf7oeBUXlojWqlDGu9qt7XWhymkA3orwMOToner9haVa93Nk0FCvBk56z/GWSrVe2yaWZKNFIm7Lf5H6mwJMunMoKHZRyYVN2Nk0uUfEgu9MXPVxaM/BBn4kuJfu8qNcz4PhOB/1RlaBmXrViB+guNmj13Bn1FxpltXvBKoGieR9zQ8ht/MgcwIgXFEqdQTGkdSf3iBvbv+Ci4br45bz7bLFHoRKHF+luN8XHSPRrDV8vtZu5O4e25GuTTb6pp2v++4FIZucZ7a5iAauDu4bhQnrqTJ0283bnnIDd3XMf+sAdsGFlHC6tqv75GLSSfi3BWT4RkJtLttMLzT/ZSEf7lKDhrRkPbanxh8gW4R0=
