@@ -106,7 +106,7 @@
         user: "{{ item.username }}"
         key: "https://github.com/{{ item.github }}.keys"
         state: present
-      with_fileglob: "group_vars/participants-{{site-name}}/*"
+      with_fileglob: "group_vars/participants-{{site_name}}/*"
 
     - name: Ensure that the user is in sudoers
       lineinfile:
