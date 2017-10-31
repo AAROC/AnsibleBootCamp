@@ -99,6 +99,7 @@
         name: "{{ item.username }}"
         comment: "User added for {{ site_name }} DevOps bootcamp"
         state: present
+        shell: /bin/bash
         createhome: true
         generate_ssh_key: true
       with_fileglob: "group_vars/participants-{{ site_name }}/*"
