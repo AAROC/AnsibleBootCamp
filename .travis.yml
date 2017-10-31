@@ -6,14 +6,15 @@ sudo: required
 services: docker
 os:
   - centos6
-  - u1404
+  - ubuntu14.04
+  - ubuntu16.10
+  - centos7
 before_install:
-  - docker pull aaroc/code-rade-sl6-ansible
-  - docker pull aaroc/code-rade-u1404-ansible
+  - docker pull aaroc/ansible-ready-${TRAVIS_OS_NAME}
 
 install:
-  - docker run -v $PWD:$PWD -w $PWD aaroc/code-rade-sl6-ansible ansible-playbook -c local -i handson/inventory.localhost handson/lesson1.yml
-  - docker run -v $PWD:$PWD -w $PWD aaroc/code-rade-u1404-ansible ansible-playbook -c local -i handson/inventory.localhost handson/lesson3.yml
+  - docker run -v $PWD:$PWD -w $PWD aaroc/ansible-ready-${TRAVIS_OS_NAME}  ansible-playbook -c local -i handson/inventory.localhost handson/lesson1.yml
+  - docker run -v $PWD:$PWD -w $PWD aaroc/ansible-ready-${TRAVIS_OS_NAME} ansible-playbook -c local -i handson/inventory.localhost handson/lesson3.yml
   - sudo pip install ansible
 
 script:
