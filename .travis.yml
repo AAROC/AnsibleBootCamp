@@ -15,7 +15,7 @@ install:
 
 script:
   - cd course-preparation/Ansible
-  - ansible-lint training-lab.yml
+  - ansible localhost -C training-lab.yml
 
 notifications:
   slack:
