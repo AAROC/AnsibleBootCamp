@@ -1,0 +1,15 @@
+---
+name: Yoseph Abate                      # Real name of the person
+    org: AAiT                               # Organisation/team they work in
+    username: yosephabate                     # username on the lab machine
+    github: yosephabate                      # github user account
+    git:                                     # git configuration on the lab machines
+      user:
+        name: Yoseph Abate
+        email: yosjudea@gmail.com
+      core:
+        editor:
+          name: vim
+          package:
+             RedHat: vim
+             Debian: vim
