@@ -2,7 +2,6 @@
 # This is an example .travis.
 # If you've forked this repo, please make sure  to change the notifications section
 
-language: bash
 sudo: required
 services: docker
 
@@ -13,6 +12,10 @@ before_install:
 install:
   - docker run -v $PWD:$PWD -w $PWD aaroc/code-rade-sl6-ansible ansible-playbook -c local -i handson/inventory.localhost handson/lesson1.yml
   - docker run -v $PWD:$PWD -w $PWD aaroc/code-rade-u1404-ansible ansible-playbook -c local -i handson/inventory.localhost handson/lesson3.yml
+
+script:
+  - cd course-preparation/Ansible
+  - ansible-lint training-lab.yml
 
 notifications:
   slack:
