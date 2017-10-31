@@ -49,6 +49,9 @@
   - name: Pick up sensitive vars
     include_vars:
       file: "group_vars/passwords-{{ site_name }}.yml"
+  - name: Pick up participants
+    include_vars:
+      file: "group_vars/participants-{{ site_name }}.yml"  
   - name: Announce the Config play
     slack:
       domain: ubuntunet.slack.com
@@ -97,7 +100,7 @@
         shell: /bin/bash
         createhome: true
         generate_ssh_key: true
-      with_fileglob: "group_vars/participants-{{ site_name }}/*"
+      with_items: "{{ participants}}"
 
     - name: Ensure that the participant ssh key on Github is in authorized keys
       authorized_key:
@@ -106,14 +109,14 @@
         user: "{{ item.username }}"
         key: "https://github.com/{{ item.github }}.keys"
         state: present
-      with_fileglob: "group_vars/participants-{{site_name}}/*"
+      with_items: "{{ participants }}"
 
     - name: Ensure that the user is in sudoers
       lineinfile:
         line: "{{item.username}}    ALL=NOPASSWD: ALL"
         file: /etc/sudoers
         validate: /usr/sbin/visudo -cf %s
-      with_fileglob: "group_vars/participants-addis/*"
+      with_items: "{{ participants}}"
 
 # assert that the preferred package is in the prerequisites ?
     - name: Assert that the preferred editor is in prerequisites
