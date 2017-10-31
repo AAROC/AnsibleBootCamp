@@ -1,0 +1,15 @@
+---
+name: Henry Simfukwe                      # Real name of the person
+  org: ZAMREN                                # Organisation/team they work in
+  username: chalemba                     # username on the lab machine
+  github: chalemba                       # github user account
+  git:                                     # git configuration on the lab machines
+    user:
+      name: Henry Simfukwe
+      email: henry.chalemba@gmail.com
+    core:
+      editor:
+        name: vim
+        package:
+          RedHat: vim
+          Debian: vim

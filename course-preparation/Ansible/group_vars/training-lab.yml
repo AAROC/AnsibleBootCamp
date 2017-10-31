@@ -3,3 +3,4 @@
 managed_prerequisites:
  - python2.7
  - python-simplejson
+ansible_user: ubuntu

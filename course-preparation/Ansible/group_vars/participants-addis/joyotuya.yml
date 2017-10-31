@@ -1,0 +1,15 @@
+---
+name: Joy Otuya                 # Real name of the person
+  org: Kenya Education Network                              # Organisation/team they work in
+  username: joyotuya                     # username on the lab machine
+  github: joyotuya                       # github user account
+  git:                                     # git configuration on the lab machines
+    user:
+      name: Joy Otuya
+      email: joyotuya@gmail.com
+    core:
+      editor:
+        name: vim
+        package:
+          RedHat: vim
+          Debian: vim
