@@ -1,7 +1,7 @@
 ---
 # This is an example .travis.
 # If you've forked this repo, please make sure  to change the notifications section
-
+language: python
 sudo: required
 services: docker
 os:
