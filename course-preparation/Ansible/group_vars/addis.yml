@@ -47,3 +47,158 @@ participants:
           package:
             RedHat: vim
             Debian: vim
+  - name: Abdulkarim Msangi                   # Real name of the person
+    org: TERNET                                # Organisation/team they work in
+    username: abms                     # username on the lab machine
+    github: abmsangi@gmail.com                       # github user account
+    git:                                     # git configuration on the lab machines
+      user:
+        name: abdulkarim msangi
+        email: abmsangi@gmail.com
+      core:
+        editor:
+          name: vim
+          package:
+            RedHat: vim
+            Debian: vim
+  - name: Henry Simfukwe                      # Real name of the person
+    org: ZAMREN                                # Organisation/team they work in
+    username: chalemba                     # username on the lab machine
+    github: chalemba                       # github user account
+    git:                                     # git configuration on the lab machines
+      user:
+        name: Henry Simfukwe
+        email: henry.chalemba@gmail.com
+      core:
+        editor:
+          name: vim
+          package:
+            RedHat: vim
+            Debian: vim
+  - name: Chris Rohrer                      # Real name of the person
+    org: UbuntuNet Alliance                                # Organisation/team they work in
+    username: chris                     # username on the lab machine
+    github: chrohrer                       # github user account
+    git:                                     # git configuration on the lab machines
+      user:
+        name: Chris Rohrer
+        email: chris.rohrer@ubuntunet.net
+      core:
+        editor:
+          name: vim
+          package:
+            RedHat: vim
+            Debian: vim
+  - name: Hellen Nakawungu                      # Real name of the person
+    org: RENU                               # Organisation/team they work in
+    username: hellen                     # username on the lab machine
+    github: hellen                      # github user account
+    git:                                     # git configuration on the lab machines
+      user:
+        name: Hellen Nakawungu
+        email: hnakawungu@renu.ac.ug
+      core:
+        editor:
+          name: vim
+          package:
+             RedHat: vim
+             Debian: vim
+  - name: Josiah Kisoso                      # Real name of the person
+    org: UR                               # Organisation/team they work in
+    username: josiah.kisoso                     # username on the lab machine
+    github: morendat                       # github user account
+    git:                                     # git configuration on the lab machines
+      user:
+        name: Josiah Kisoso
+        email: jskisoso@gmail.com
+      core:
+        editor:
+          name: vim
+          package:
+            RedHat: vim
+            Debian: vim
+  - name: Joy Otuya                 # Real name of the person
+    org: Kenya Education Network                              # Organisation/team they work in
+    username: joyotuya                     # username on the lab machine
+    github: joyotuya                       # github user account
+    git:                                     # git configuration on the lab machines
+      user:
+        name: Joy Otuya
+        email: joyotuya@gmail.com
+      core:
+        editor:
+          name: vim
+          package:
+            RedHat: vim
+            Debian: vim
+  - name: Mohamed A. Ali                      # Real name of the person
+    org: SomlaiREN                                # Organisation/team they work in
+    username: mjarfadhi                     # username on the lab machine
+    github: mjarfadhi                       # github user account
+    git:                                     # git configuration on the lab machines
+      user:
+        name: Mohamed A. Ali
+         email: ict@psu.edu.so
+      core:
+        editor:
+          name: vim
+          package:
+            RedHat: vim
+            Debian: vim
+  - name: Neovaldo Maculuve                      # Real name of the person
+    org: MoRENet                                # Organisation/team they work in
+    username: neovaldopaulo                     # username on the lab machine
+    github: neovaldopaulo                       # github user account
+    git:                                     # git configuration on the lab machines
+      user:
+        name: Neovaldo Maculuve
+        email: neovaldopaulo@hotmail.com
+      core:
+        editor:
+          name: vim
+          package:
+            RedHat: vim
+            Debian: vim
+  - name: Niry Andriambelo                       # Real name of the person
+    org: iRENALA                             # Organisation/team they work in
+    username: NyAndria                       # username on the lab machine
+    github: NyAndria                         # github user account
+    git:                                     # git configuration on the lab machines
+      user:
+        name: Niry Andriambelo
+        email: andriambelo.niry@gmail.com
+      core:
+        editor:
+          name: vim
+          package:
+            RedHat: vim
+            Debian: vim
+  - name: Walumbuka Ilundu WAil                     # Real name of the person
+    org: MINESU                               # Organisation/team they work in
+    username: wail                            # username on the lab machine
+    github: wail                              # github user account
+    git:                                      # git configuration on the lab machines
+      user:
+        name: walumbuka wail
+        email: ilunduwail@gmail.com
+      core:
+        editor:
+          name: vim
+          package:
+            RedHat: vim
+            Debian: vim
+  - name: Walu Gondwe                          # Real name of the person
+    org: MAREN                             # Organisation/team they work in
+    username: walusungu.gondwe             # username on the lab machine
+    github: agondway                       # github user account
+    git:                                     # git configuration on the lab machines
+      user:
+        name: Walu Gondwe
+        email: wgondwe@bintelanalytics.mw
+      core:
+        editor:
+          name: vim
+          package:
+            RedHat: vim
+            Debian: vim
+            
