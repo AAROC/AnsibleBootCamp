@@ -7,24 +7,26 @@ env:
   - OS=ubuntu14.04
   - OS=ubuntu16.10
   - OS=centos7
+  - secure: S/Rio4zangWR5VGnEzf63v9OVmYCwKuZBwovq66dhNjcaZUY0c2Us4J9QgthbTUhWzfD5NyZpcBjrigzvoO1Jkz+U/dX+PKX/1Gsq9GCrmf1rVMXNa6Wr/xn3+ravBMw6DMe0HcFy4lFwAO1NJ9F+7sKacbRx9kybhG4BkQ9MpmuMG4K4gse+HhDOjoZ1KRPwNeqi0HFmN8KFeC/GfxTYDAMQuYlxeLkcusfgpOhzXNehHynbpqIQzXT097YRXyfks9u175LUeI3RNJ54FcSc3n8QMYl+r8ECeqzh0akQ2euuFESFXBrW5ovyjwie96wag5d7+rTBzhQF+hGTRUXUQYjQUGBgrVCfgrn/sgY/tlq9bQV2q1fqJY7tcKg5nPvsF/qzG/EOsfKCRvxfxPsEixlrw7Zdz+5HpC8cxsP4n3O8gOnFoG7XYn2EURtSt+Z90+BPkObmJ/Jtqem+Ro0pl1d91lALENxpw0HGUts5AsZ4wrbToSehoE15U1ZTcqvSpK3AncRiXOR7OIDKted288GnmK5JytBc5Md9cb7QPNNxFIietLww4hITZnmFLDZhJJXG24pbnZKZ087ZyLMnzuHvPQ3PXhjUrMWtnvnViy5+Kb4IA4bMD4L0E7qSq5NvzSAQx6etNCXJ1TLfKvINZS7toSV2I3bfioAqp6oubY=
 before_install:
 - docker pull quay.io/aaroc/ansible-ready-${OS}
 install:
-- docker run -v $PWD:$PWD -w $PWD quay.io/aaroc/ansible-ready-${OS}  ansible-playbook -c local
-  -i handson/inventory.localhost handson/lesson1.yml
-- docker run -v $PWD:$PWD -w $PWD quay.io/aaroc/ansible-ready-${OS} ansible-playbook -c local
-  -i handson/inventory.localhost handson/lesson3.yml
+- docker run -v $PWD:$PWD -w $PWD quay.io/aaroc/ansible-ready-${OS}  ansible-playbook
+  -c local -i handson/inventory.localhost handson/lesson1.yml
+- docker run -v $PWD:$PWD -w $PWD quay.io/aaroc/ansible-ready-${OS} ansible-playbook
+  -c local -i handson/inventory.localhost handson/lesson3.yml
 - sudo pip install ansible
 script:
 - cd course-preparation/Ansible
-- ansible-playbook -c local -i localhost, -C training-lab.yml -e site_name=testing
-- ansible-playbook -c local -i localhost, training-lab.yml -e site_name=testing
+- echo ${VAULT_PASSWORD} > vault_password
+- ansible-playbook -c local -i localhost, -C training-lab.yml -e site_name=testing --vault-password-file=vault_password
+- ansible-playbook -c local -i localhost, training-lab.yml -e site_name=testing --vault-password-file=vault_password
 notifications:
   webhooks:
     on_success: change
-    on_failure: always # default: always
-    on_start: change   # default: never
-    on_cancel: always # default: always
-    on_error: always # default: always
+    on_failure: always
+    on_start: change
+    on_cancel: always
+    on_error: always
   slack:
     secure: Bko15pWpKN9ndvUGESTDwX/6KL2boCb25ZLoG55gnzggGkZDZ8p/QtcMP5Ro2Q3aLFYnjXyFUalqfn0ejUEzAp4VC8irwsnPDARhsvTh1sClwrVYI6hhTfxGUPkjNCG64/Y3weDD5ZmCW/k1s4ylK4enVGvMSy4/6gayM5qyjGuQ/eYIAlqJnkzyBjUHcIDGVVAjSf0w6/IF9MZ5zotQUObvVPhrWNX+KkNTUjp7reHT4lLHN6OVpDv10RQJaAwQPxAZOV+Lb03F1e6xZ4st3fKYWK/+nv5oAOgZx8Q6IuIY2ax6qpzF8AF+SAapAXIp77irf7oeBUXlojWqlDGu9qt7XWhymkA3orwMOToner9haVa93Nk0FCvBk56z/GWSrVe2yaWZKNFIm7Lf5H6mwJMunMoKHZRyYVN2Nk0uUfEgu9MXPVxaM/BBn4kuJfu8qNcz4PhOB/1RlaBmXrViB+guNmj13Bn1FxpltXvBKoGieR9zQ8ht/MgcwIgXFEqdQTGkdSf3iBvbv+Ci4br45bz7bLFHoRKHF+luN8XHSPRrDV8vtZu5O4e25GuTTb6pp2v++4FIZucZ7a5iAauDu4bhQnrqTJ0283bnnIDd3XMf+sAdsGFlHC6tqv75GLSSfi3BWT4RkJtLttMLzT/ZSEf7lKDhrRkPbanxh8gW4R0=
