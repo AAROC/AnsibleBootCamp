@@ -52,9 +52,10 @@
   - name: Pick up participants
     include_vars:
       file: "group_vars/participants-{{ site_name }}.yml"  
+  
   - name: Announce the Config play
     slack:
-      domain: ubuntunet.slack.com
+      domain: "{{ slack_domain }}"
       token: "{{ slack_token }}"
       msg: "Running training-lab configuration on {{ inventory_hostname }} at {{ site_name }} :worried: "
       username: "Ansible on {{ inventory_hostname }}"
