@@ -1,6 +1,6 @@
 ---
 - name: Mohamed A. Ali                      # Real name of the person
-  org: SomlaiREN                                # Organisation/team they work in
+  org: somlaiREN                                # Organisation/team they work in
   	username: mjarfadhi                     # username on the lab machine
   	github: mjarfadhi                       # github user account
   	git:                                     # git configuration on the lab machines
