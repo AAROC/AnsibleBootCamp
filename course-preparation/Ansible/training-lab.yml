@@ -14,30 +14,30 @@
     include_vars:
       file: "group_vars/passwords-{{ site_name }}.yml"
 
-  - name: Announce the setup
-    slack:
-      domain: ubuntunet.slack.com
-      token: "{{ slack_token }}"
-      msg: "Running training-lab setup for {{ inventory_hostname }} at {{ site_name }} :worried: "
-      channel: "#devops"
-      username: "Ansible on {{ inventory_hostname }}"
-      link_names: 1
-      parse: 'full'
+  # - name: Announce the setup
+  #   slack:
+  #     domain: ubuntunet.slack.com
+  #     token: "{{ slack_token }}"
+  #     msg: "Running training-lab setup for {{ inventory_hostname }} at {{ site_name }} :worried: "
+  #     channel: "#devops"
+  #     username: "Ansible on {{ inventory_hostname }}"
+  #     link_names: 1
+  #     parse: 'full'
 
   - name: Low down dirty setup
     become: true
     raw: "apt-get -y install {{ item }}"
     with_items: "{{ managed_prerequisites }}"
 
-  - name: Announce the outcome
-    slack:
-      domain: ubuntunet.slack.com
-      token: "{{ slack_token }}"
-      msg: "Running training-lab setup for {{ inventory_hostname }} at {{ site_name }} :ok_hand: "
-      channel: "#devops"
-      username: "Ansible on {{ inventory_hostname }}"
-      link_names: 1
-      parse: 'full'
+  # - name: Announce the outcome
+  #   slack:
+  #     domain: ubuntunet.slack.com
+  #     token: "{{ slack_token }}"
+  #     msg: "Running training-lab setup for {{ inventory_hostname }} at {{ site_name }} :ok_hand: "
+  #     channel: "#devops"
+  #     username: "Ansible on {{ inventory_hostname }}"
+  #     link_names: 1
+  #     parse: 'full'
 
 - hosts: training-lab
   name: Deploy Ansible onto the lab
@@ -45,15 +45,15 @@
   - name: Pick up sensitive vars
     include_vars:
       file: "group_vars/passwords-{{ site_name }}.yml"
-  - name: Announce the Config play
-    slack:
-      domain: ubuntunet.slack.com
-      token: "{{ slack_token }}"
-      msg: "Running training-lab configuration on {{ inventory_hostname }} at {{ site_name }} :worried: "
-      channel: "#devops"
-      username: "Ansible on {{ inventory_hostname }}"
-      link_names: 1
-      parse: 'full'
+  # - name: Announce the Config play
+  #   slack:
+  #     domain: ubuntunet.slack.com
+  #     token: "{{ slack_token }}"
+  #     msg: "Running training-lab configuration on {{ inventory_hostname }} at {{ site_name }} :worried: "
+  #     channel: "#devops"
+  #     username: "Ansible on {{ inventory_hostname }}"
+  #     link_names: 1
+  #     parse: 'full'
   - name: Install some basic stuff
     become: true
     package:
@@ -67,30 +67,64 @@
       name: ansible
       state: present
 
-  - name: Announce the Config play outcome
-    slack:
-      domain: ubuntunet.slack.com
-      token: "{{ slack_token }}"
-      msg: "{{ inventory_hostname }} at {{ site_name }} now knows kung-fu :neo:"
-      channel: "#devops"
-      username: "Ansible on {{ inventory_hostname }}"
-      link_names: 1
-      parse: 'full'
+- hosts: training-lab
+  name: Deploy Docker onto the lab
+  become: true
+  tags: docker
+  tasks:
+  - name: Allow apt over https
+    become: true
+    raw: "apt-get -y install {{ item }}"
+    with_items:
+      - apt-transport-https
+      - ca-certificates
+      - curl
+      - software-properties-common
+
+  - name: Ensure Docker repository key is installed
+    apt_key:
+      id: "0EBFCD88"
+      keyserver: "https://download.docker.com/linux/ubuntu/gpg"
+      state: present
+
+  - name: Ensure docker registry is available
+    apt_repository: 
+      repo: deb [arch=amd64] https://download.docker.com/linux/ubuntu xenial stable
+      state: present
+
+  - name: Ensure docker and dependencies are installed
+    apt:
+      name: docker-ce
+      update_cache: yes
+
+  # - name: Announce the Config play outcome
+  #   slack:
+  #     domain: ubuntunet.slack.com
+  #     token: "{{ slack_token }}"
+  #     msg: "{{ inventory_hostname }} at {{ site_name }} now knows kung-fu :neo:"
+  #     channel: "#devops"
+  #     username: "Ansible on {{ inventory_hostname }}"
+  #     link_names: 1
+  #     parse: 'full'
 
 # This is a single loop over participants - should be done in a block
 - name: Setup the users
   hosts: all
   tasks:
     - name: Add the participant
+      become: true
       user:
         name: "{{ item.username }}"
         comment: "User added for {{ site_name }} DevOps bootcamp"
         state: present
         createhome: true
-        generate_ssh_key: true
+        generate_ssh_key: false
+        groups: docker
+        append: yes
       with_items: "{{ participants }}"
 
     - name: Ensure that the participant ssh key on Github is in authorized keys
+      become: true
       authorized_key:
         exclusive: no
         manage_dir: yes
@@ -99,10 +133,11 @@
         state: present
       with_items: "{{ participants }}"
 
-# assert that the preferred package is in the prerequisites ?
+    # assert that the preferred package is in the prerequisites ?
     - name: Assert that the preferred editor is in prerequisites
       assert:
-        that: "{{ item.git.core.package[ansible_os_family ]}} in prerequisites[ansible_os_family]"
+        that: "'{{ item.git.core.editor.package[ansible_os_family ]}}' in prerequisites[ansible_os_family]"
+      with_items: "{{ participants }}"
 
     # - name: Ensure that the preferred editor is available
     #   package:
@@ -115,3 +150,4 @@
         name: core.editor
         value: "{{ item.git.core.editor}}"
         scope: global
+      with_items: "{{ participants }}"
