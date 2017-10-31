@@ -1,14 +1,14 @@
 name: Walumbuka Ilundu WAil                     # Real name of the person
-    org: MINESU                               # Organisation/team they work in
-    username: wail                            # username on the lab machine
-    github: wail                              # github user account
-    git:                                      # git configuration on the lab machines
-      user:
-        name: walumbuka wail
-        email: ilunduwail@gmail.com
-      core:
-        editor:
-          name: vim
-          package:
-            RedHat: vim
-            Debian: vim
+  org: MINESU                               # Organisation/team they work in
+  username: wail                            # username on the lab machine
+  github: wail                              # github user account
+  git:                                      # git configuration on the lab machines
+    user:
+      name: walumbuka wail
+      email: ilunduwail@gmail.com
+    core:
+      editor:
+        name: vim
+        package:
+          RedHat: vim
+          Debian: vim

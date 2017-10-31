@@ -1,15 +1,15 @@
 ---
 name: Niry Andriambelo                       # Real name of the person
-    org: iRENALA                             # Organisation/team they work in
-    username: NyAndria                       # username on the lab machine
-    github: NyAndria                         # github user account
-    git:                                     # git configuration on the lab machines
-      user:
-        name: Niry Andriambelo
-        email: andriambelo.niry@gmail.com
-      core:
-        editor:
-          name: vim
-          package:
-            RedHat: vim
-            Debian: vim
+  org: iRENALA                             # Organisation/team they work in
+  username: NyAndria                       # username on the lab machine
+  github: NyAndria                         # github user account
+  git:                                     # git configuration on the lab machines
+    user:
+      name: Niry Andriambelo
+      email: andriambelo.niry@gmail.com
+    core:
+      editor:
+        name: vim
+        package:
+          RedHat: vim
+          Debian: vim

@@ -1,15 +1,15 @@
 ---
 name: Bruce  Becker                      # Real name of the person
-    org: CSIR                                # Organisation/team they work in
-    username: brucellino                     # username on the lab machine
-    github: brucellino                       # github user account
-    git:                                     # git configuration on the lab machines
-      user:
-        name: Bruce Becker
-        email: brucellino@gmail.com
-      core:
-        editor:
-          name: vim
-          package:
-            RedHat: vim
-            Debian: vim
+  org: CSIR                                # Organisation/team they work in
+  username: brucellino                     # username on the lab machine
+  github: brucellino                       # github user account
+  git:                                     # git configuration on the lab machines
+    user:
+      name: Bruce Becker
+      email: brucellino@gmail.com
+    core:
+      editor:
+        name: vim
+        package:
+          RedHat: vim
+          Debian: vim
