@@ -12,10 +12,12 @@ before_install:
 install:
   - docker run -v $PWD:$PWD -w $PWD aaroc/code-rade-sl6-ansible ansible-playbook -c local -i handson/inventory.localhost handson/lesson1.yml
   - docker run -v $PWD:$PWD -w $PWD aaroc/code-rade-u1404-ansible ansible-playbook -c local -i handson/inventory.localhost handson/lesson3.yml
+  - pip install ansible
 
 script:
   - cd course-preparation/Ansible
   - ansible localhost -C training-lab.yml
+  - ansible localhost training-lab.yml -e site_name=testing
 
 notifications:
   slack:
