@@ -1,0 +1,25 @@
+---
+site_name: travis
+slack_domain: africa-arabia-roc
+ansible_user: ubuntu
+chat_service: slack # or rocket chat
+prerequisites:
+  Debian:
+    - vim
+    - make
+    - git
+    - python-pip
+    - python-setuptools
+    - python-dev
+    - libssl-dev
+    - gcc
+    - nano
+    - joe
+  RedHat:
+    - vim
+    - make
+    - git
+    - python-pip
+    - python-setuptools
+    - python-devel
+    - gcc

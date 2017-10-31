@@ -19,8 +19,8 @@ install:
 script:
 - cd course-preparation/Ansible
 - echo ${VAULT_PASSWORD} > vault_password
-- ansible-playbook -c local -i localhost, -C training-lab.yml -e site_name=testing --vault-password-file=vault_password
-- ansible-playbook -c local -i localhost, training-lab.yml -e site_name=testing --vault-password-file=vault_password
+- ansible-playbook -c local -i travis.ini -C training-lab.yml --vault-password-file=vault_password
+- ansible-playbook -c local -i travis.ini training-lab.yml --vault-password-file=vault_password
 notifications:
   webhooks:
     on_success: change
