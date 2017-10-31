@@ -1,0 +1,14 @@
+name: Christian Ndikuriyo                     # Real name of the person
+  org: BERNET                      # Organisation/team they work in
+  username: ndichris08                            # username on the lab machine
+  github: ndichris08                      # github user account
+  git:                                      # git configuration on the lab machines
+    user:
+      name: Christian Ndikuriyo
+      email: ndikuriyo.christian@gmail.com
+    core:
+      editor:
+        name: vim
+        package:
+          RedHat: vim
+          Debian: vim
