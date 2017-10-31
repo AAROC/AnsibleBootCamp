@@ -10,9 +10,9 @@ env:
 before_install:
 - docker pull quay.io/aaroc/ansible-ready-${OS}
 install:
-- docker run -v $PWD:$PWD -w $PWD aaroc/ansible-ready-${OS}  ansible-playbook -c local
+- docker run -v $PWD:$PWD -w $PWD quay.io/aaroc/ansible-ready-${OS}  ansible-playbook -c local
   -i handson/inventory.localhost handson/lesson1.yml
-- docker run -v $PWD:$PWD -w $PWD aaroc/ansible-ready-${OS} ansible-playbook -c local
+- docker run -v $PWD:$PWD -w $PWD quay.ioaaroc/ansible-ready-${OS} ansible-playbook -c local
   -i handson/inventory.localhost handson/lesson3.yml
 - sudo pip install ansible
 script:
