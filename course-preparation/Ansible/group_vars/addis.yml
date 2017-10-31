@@ -1,6 +1,8 @@
 ---
 site_name: addis
+slack_domain: africa-arabia-roc
 ansible_user: ubuntu
+chat_service: slack # or rocket chat
 prerequisites:
   Debian:
     - vim
