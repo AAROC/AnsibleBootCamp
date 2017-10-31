@@ -6,7 +6,7 @@ name: Yoseph Abate                      # Real name of the person
     git:                                     # git configuration on the lab machines
       user:
         name: Yoseph Abate
-        email: yosjudea@gmail.com
+        email: yosjudea@yahoo.com
       core:
         editor:
           name: vim
