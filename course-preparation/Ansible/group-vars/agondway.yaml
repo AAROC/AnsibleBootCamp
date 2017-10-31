@@ -1,6 +1,6 @@
 ---
 name: Walu Gondwe                          # Real name of the person
-    org: MUST/Malawi                       # Organisation/team they work in
+    org: MAREN                             # Organisation/team they work in
     username: walusungu.gondwe             # username on the lab machine
     github: agondway                       # github user account
     git:                                     # git configuration on the lab machines
