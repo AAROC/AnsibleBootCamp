@@ -168,3 +168,18 @@ participants:
           package:
             RedHat: vim
             Debian: vim
+
+  - name: Yonas Mekonne                          # Real name of the person
+    org: EtherNet                    # Organisation/team they work in
+    username: yonasm             # username on the lab machine
+    github: yonasm                       # github user account
+    git:                                     # git configuration on the lab machines
+      user:
+        name: Yonas Mekonne
+        email: yonaset19@gmail.com
+      core:
+        editor:
+          name: vim
+          package:
+            RedHat: vim
+            Debian: vim
