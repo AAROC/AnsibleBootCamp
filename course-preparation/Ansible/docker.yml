@@ -1,0 +1,22 @@
+---
+
+- hosts: 196.223.215.139
+  become: true
+  name: Deploy Docker onto your own server
+  tasks:
+
+  - name: Ensure Docker repository key is installed
+    apt_key:
+      id: "0EBFCD88"
+      keyserver: "https://download.docker.com/linux/ubuntu/gpg"
+      state: present
+
+  - name: Ensure docker registry is available
+    apt_repository: 
+      repo: deb [arch=amd64] https://download.docker.com/linux/ubuntu xenial stable
+      state: present
+
+  - name: Ensure docker and dependencies are installed
+    apt:
+      name: docker-ce
+      update_cache: yes
